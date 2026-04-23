@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function ContactSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', contact: '', requirement: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', countryCode: '+91', contact: '', requirement: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -11,20 +11,26 @@ export default function ContactSection() {
     setStatus('loading');
     
     try {
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        contact: `${formData.countryCode} ${formData.contact}`,
+        requirement: formData.requirement
+      };
+
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
       
       if (!res.ok) throw new Error('Failed to send');
       
       setStatus('success');
-      setTimeout(() => {
-        setIsModalOpen(false);
-        setStatus('idle');
-        setFormData({ name: '', email: '', contact: '', requirement: '' });
-      }, 3000);
+      setFormData({ name: '', email: '', countryCode: '+91', contact: '', requirement: '' });
+      setIsModalOpen(false);
+      // Optional: reset status after closing so it's clean next time
+      setTimeout(() => setStatus('idle'), 500);
     } catch (err) {
       console.error(err);
       setStatus('error');
@@ -117,18 +123,30 @@ export default function ContactSection() {
               value={formData.email}
               onChange={handleChange}
             />
-            <input 
-              type="text" 
-              name="contact" 
-              placeholder="Contact Number" 
-              required 
-              value={formData.contact}
-              onChange={handleChange}
-            />
+            <div className="kr-modal__phone-group">
+              <input
+                type="text"
+                name="countryCode"
+                value={formData.countryCode}
+                onChange={handleChange}
+                placeholder="+91"
+                style={{ width: '80px', flexShrink: 0, textAlign: 'center' }}
+              />
+              <input 
+                type="text" 
+                name="contact" 
+                placeholder="Contact Number" 
+                required 
+                value={formData.contact}
+                onChange={handleChange}
+                style={{ flex: 1 }}
+              />
+            </div>
             <textarea 
               name="requirement" 
-              placeholder="Your Requirement" 
+              placeholder="Your Requirement (Max 1000 characters)" 
               required 
+              maxLength={1000}
               value={formData.requirement}
               onChange={handleChange}
             />

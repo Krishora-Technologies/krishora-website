@@ -1875,7 +1875,7 @@ ol {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  z-index: 100000;
+  z-index: 99998;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1969,6 +1969,30 @@ ol {
 .kr-modal__form textarea {
   resize: vertical;
   min-height: 100px;
+}
+
+.kr-modal__phone-group {
+  display: flex;
+  gap: 12px;
+}
+
+.kr-modal__country-code {
+  width: 110px;
+  padding: 14px 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: var(--bg-secondary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-primary);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+  cursor: pointer;
+}
+
+.kr-modal__country-code:focus {
+  border-color: var(--accent-1);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .kr-modal__submit {
