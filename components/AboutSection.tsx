@@ -8,12 +8,17 @@ export default function AboutSection() {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
     const el = sectionRef.current;
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      // Scroll-reveal for big typography words (for-text data-scroll-word style)
+      // Set initial hidden states via GSAP to avoid CLS
       const words = el.querySelectorAll<HTMLElement>(".kr-typo-word, .kr-typo-symbol");
+      gsap.set(words, { y: 80, opacity: 0 });
+      gsap.set(el.querySelectorAll(".kr-stat"), { opacity: 0, y: 30 });
+
+      // Scroll-reveal for big typography words
       words.forEach((word, i) => {
         gsap.fromTo(
           word,
@@ -89,22 +94,25 @@ export default function AboutSection() {
       });
 
       // Reveal text section (for-text §2 big reveal)
-      gsap.fromTo(
-        el.querySelectorAll(".reveal-word"),
-        { y: "100%", opacity: 0 },
-        {
-          y: "0%",
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.09,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: el.querySelector(".kr-about__reveal"),
-            start: "top 75%",
-            toggleActions: "play none none reverse",
+      const revealWords = el.querySelectorAll(".reveal-word");
+      if (revealWords.length > 0) {
+        gsap.fromTo(
+          revealWords,
+          { y: "100%", opacity: 0 },
+          {
+            y: "0%",
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.09,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: el.querySelector(".kr-about__reveal"),
+              start: "top 75%",
+              toggleActions: "play none none reverse",
+            },
           },
-        },
-      );
+        );
+      }
     }, el);
 
     return () => ctx.revert();

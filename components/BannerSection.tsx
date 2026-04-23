@@ -5,13 +5,24 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function BannerSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const tiltRef = useRef<HTMLDivElement>(null);
+  const spotlightRef = useRef<HTMLDivElement>(null);
+  const btnRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
     const el = sectionRef.current;
     if (!el) return;
 
     const ctx = gsap.context(() => {
+      // Initial set
+      gsap.set(el.querySelectorAll(".kr-banner__eyebrow"), { y: 20, opacity: 0 });
+      gsap.set(el.querySelectorAll(".kr-banner__headline span"), { y: "110%" });
+      gsap.set(el.querySelector(".kr-banner__sub"), { y: 20, opacity: 0 });
+      gsap.set(el.querySelectorAll(".kr-banner__cta a"), { y: 20, opacity: 0 });
+      gsap.set(el.querySelectorAll(".kr-banner__orb"), { scale: 0, opacity: 0 });
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: el,
@@ -20,131 +31,152 @@ export default function BannerSection() {
         },
       });
 
-      // Top descriptors
-      tl.to(el.querySelectorAll(".kr-banner__top h5, .kr-banner__top h6"), {
-        y: 0,
-        duration: 0.7,
-        stagger: 0.12,
-        ease: "power3.out",
+      tl.to(el.querySelectorAll(".kr-banner__orb"), {
+        scale: 1,
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: "elastic.out(1, 0.5)",
       })
-      .to(el.querySelector(".kr-banner__top-line"), {
-        scaleX: 1,
-        duration: 0.8,
+      .to(el.querySelector(".kr-banner__eyebrow"), {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
         ease: "power3.out",
-      }, "-=0.4")
-      // Big letter left
-      .to(el.querySelectorAll(".kr-banner__left h1 span"), {
+      }, "-=0.8")
+      .to(el.querySelectorAll(".kr-banner__headline span"), {
         y: 0,
         duration: 0.9,
-        stagger: 0.1,
+        stagger: 0.08,
         ease: "power3.out",
       }, "-=0.4")
-      // Middle heading
-      .to(el.querySelectorAll(".kr-banner__middle h2 span"), {
+      .to(el.querySelector(".kr-banner__sub"), {
         y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      }, "-=0.6")
-      // Number right
-      .to(el.querySelectorAll(".kr-banner__right h1 span"), {
-        y: 0,
-        duration: 0.9,
-        stagger: 0.1,
-        ease: "power3.out",
-      }, "-=0.7")
-      // Meta labels
-      .to(el.querySelectorAll(".kr-banner__left-meta h5, .kr-banner__left-meta h6"), {
+        opacity: 1,
+        duration: 0.7,
+        ease: "power2.out",
+      }, "-=0.5")
+      .to(el.querySelectorAll(".kr-banner__cta a"), {
         y: 0,
         opacity: 1,
         duration: 0.5,
-        stagger: 0.08,
+        stagger: 0.1,
         ease: "power2.out",
-      }, "-=0.4")
-      // Social icons
-      .to(el.querySelectorAll(".kr-banner__right-social a"), {
-        y: 0,
-        opacity: 1,
-        duration: 0.5,
-        stagger: 0.08,
-        ease: "power2.out",
-      }, "-=0.3");
+      }, "-=0.4");
+
+      // Continuous orb float
+      el.querySelectorAll(".kr-banner__orb").forEach((orb, i) => {
+        gsap.to(orb, {
+          y: `+=${20 + i * 15}`,
+          x: `+=${10 + i * 8}`,
+          duration: 3 + i * 0.8,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+      });
+
+      // Scroll parallax on orbs
+      el.querySelectorAll(".kr-banner__orb").forEach((orb, i) => {
+        gsap.to(orb, {
+          y: (i + 1) * -60,
+          ease: "none",
+          scrollTrigger: {
+            trigger: el,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
     }, el);
 
-    return () => ctx.revert();
+    // 3D tilt on mouse move
+    const tilt = tiltRef.current;
+    const onMove = (e: MouseEvent) => {
+      if (!tilt || !el) return;
+      const rect = el.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      gsap.to(tilt, {
+        rotationY: x * 6,
+        rotationX: -y * 6,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+      // Spotlight follow
+      if (spotlightRef.current) {
+        spotlightRef.current.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+        spotlightRef.current.style.setProperty("--my", `${e.clientY - rect.top}px`);
+      }
+    };
+    const onLeave = () => {
+      if (!tilt) return;
+      gsap.to(tilt, { rotationY: 0, rotationX: 0, duration: 0.8, ease: "power2.out" });
+    };
+    el.addEventListener("mousemove", onMove);
+    el.addEventListener("mouseleave", onLeave);
+
+    // Magnetic buttons
+    btnRefs.current.forEach((btn) => {
+      if (!btn) return;
+      const onBtnMove = (e: MouseEvent) => {
+        const rect = btn.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = (e.clientX - cx) * 0.3;
+        const dy = (e.clientY - cy) * 0.3;
+        gsap.to(btn, { x: dx, y: dy, duration: 0.3, ease: "power2.out" });
+      };
+      const onBtnLeave = () => {
+        gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+      };
+      btn.addEventListener("mousemove", onBtnMove);
+      btn.addEventListener("mouseleave", onBtnLeave);
+    });
+
+    return () => {
+      ctx.revert();
+      el.removeEventListener("mousemove", onMove);
+      el.removeEventListener("mouseleave", onLeave);
+    };
   }, []);
 
   return (
-    <section ref={sectionRef} id="about" className="kr-banner">
-      <div className="kr-banner__inner">
-        {/* Top descriptor row */}
-        <div className="kr-banner__top">
-          <h5>Innovative Solutions</h5>
-          <h6>Research &amp; Development — 2024</h6>
-          <div className="kr-banner__top-line" />
-        </div>
+    <section ref={sectionRef} className="kr-banner">
+      {/* Background orbs */}
+      <div className="kr-banner__orb kr-banner__orb--1" aria-hidden="true" />
+      <div className="kr-banner__orb kr-banner__orb--2" aria-hidden="true" />
+      <div className="kr-banner__orb kr-banner__orb--3" aria-hidden="true" />
 
-        {/* Main layout */}
-        <div className="kr-banner__bottom">
-          {/* Left — big letter */}
-          <div className="kr-banner__left">
-            <h1 aria-hidden="true">
-              <span>K</span>
-            </h1>
-            <div className="kr-banner__left-meta">
-              <h5>Cloud &amp; AI</h5>
-              <h6>Architecture Study</h6>
-            </div>
-          </div>
+      {/* Mouse spotlight */}
+      <div ref={spotlightRef} className="kr-banner__spotlight" aria-hidden="true" />
 
-          {/* Middle — main title */}
-          <div className="kr-banner__middle">
-            <h2>
-              <span>Dynamic</span>
-            </h2>
-            <h2>
-              <span>Solutions</span>
-            </h2>
-          </div>
+      {/* Floating particles */}
+      <div className="kr-banner__particles" aria-hidden="true">
+        {Array.from({ length: 24 }).map((_, i) => (
+          <span key={i} className="kr-banner__particle" style={{ '--i': i } as React.CSSProperties} />
+        ))}
+      </div>
 
-          {/* Right — number + socials */}
-          <div className="kr-banner__right">
-            <h1 aria-hidden="true">
-              <span>01</span>
-            </h1>
-            <div className="kr-banner__right-social">
-              <span>Connect</span>
-              <ul>
-                <li>
-                  <a href="https://linkedin.com" className="magnetic" aria-label="LinkedIn" target="_blank" rel="noreferrer">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z M4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://twitter.com" aria-label="X / Twitter" target="_blank" rel="noreferrer">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://github.com" aria-label="GitHub" target="_blank" rel="noreferrer">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z" />
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a href="mailto:hello@krishora.tech" aria-label="Email">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                      <polyline points="22,6 12,13 2,6" />
-                    </svg>
-                  </a>
-                </li>
-              </ul>
-            </div>
+      <div ref={tiltRef} className="kr-banner__tilt">
+        <div className="kr-banner__inner">
+          <p className="kr-banner__eyebrow">What We Do</p>
+
+          <h2 className="kr-banner__headline">
+            <span>We Engineer</span>
+            <span>Digital Excellence</span>
+          </h2>
+
+          <p className="kr-banner__sub">
+            From cloud-native architectures to AI-driven platforms, we transform
+            complex challenges into elegant, scalable solutions that power modern
+            enterprises.
+          </p>
+
+          <div className="kr-banner__cta">
+            <a ref={(el) => { btnRefs.current[0] = el; }} href="#services">Explore Services</a>
+            <a ref={(el) => { btnRefs.current[1] = el; }} href="#contact">Get in Touch</a>
           </div>
         </div>
       </div>

@@ -6,43 +6,41 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroSection from "@/components/HeroSection";
 import BannerSection from "@/components/BannerSection";
 import AboutSection from "@/components/AboutSection";
+import TechStackMarquee from "@/components/TechStackMarquee";
 import ServicesSection from "@/components/ServicesSection";
+import ProcessSection from "@/components/ProcessSection";
 import ContactSection from "@/components/ContactSection";
 
 export default function Home() {
   const cursorDotRef = useRef<HTMLDivElement>(null);
-  const cursorRingRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
 
   /* ── Custom cursor (for-text style) ── */
   useEffect(() => {
     const dot = cursorDotRef.current;
-    const ring = cursorRingRef.current;
-    if (!dot || !ring) return;
+    if (!dot) return;
 
-    gsap.set([dot, ring], { xPercent: -50, yPercent: -50 });
-    const xDot = gsap.quickTo(dot, "x", { duration: 0.1, ease: "power3" });
-    const yDot = gsap.quickTo(dot, "y", { duration: 0.1, ease: "power3" });
-    const xRing = gsap.quickTo(ring, "x", { duration: 0.45, ease: "power3" });
-    const yRing = gsap.quickTo(ring, "y", { duration: 0.45, ease: "power3" });
+    gsap.set(dot, { xPercent: -50, yPercent: -50 });
+    const xDot = gsap.quickTo(dot, "x", { duration: 0.15, ease: "power3" });
+    const yDot = gsap.quickTo(dot, "y", { duration: 0.15, ease: "power3" });
 
     function onMove(e: MouseEvent) {
       xDot(e.clientX);
       yDot(e.clientY);
-      xRing(e.clientX);
-      yRing(e.clientY);
     }
 
-    function onEnterLink() { ring!.closest(".kr-cursor")?.classList.add("kr-cursor--hover"); }
-    function onLeaveLink() { ring!.closest(".kr-cursor")?.classList.remove("kr-cursor--hover"); }
+    function onEnterLink() { dot!.closest(".kr-cursor")?.classList.add("kr-cursor--hover"); }
+    function onLeaveLink() { dot!.closest(".kr-cursor")?.classList.remove("kr-cursor--hover"); }
 
     window.addEventListener("mousemove", onMove);
-    document.querySelectorAll("a, button, [class*='nav-item'], [class*='magnetic']").forEach(el => {
+    document.querySelectorAll("a, button, [class*='nav-item'], [class*='magnetic'], .kr-service-card").forEach(el => {
       el.addEventListener("mouseenter", onEnterLink);
       el.addEventListener("mouseleave", onLeaveLink);
     });
 
-    return () => window.removeEventListener("mousemove", onMove);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+    };
   }, []);
 
   /* ── Nav reveal after load ── */
@@ -84,7 +82,6 @@ export default function Home() {
       {/* ── Custom cursor ── */}
       <div className="kr-cursor" aria-hidden="true">
         <div ref={cursorDotRef} className="kr-cursor__dot" />
-        <div ref={cursorRingRef} className="kr-cursor__ring" />
       </div>
 
       {/* ── Fixed nav (GSAP moves it to dock) ── */}
@@ -108,7 +105,9 @@ export default function Home() {
         <HeroSection />
         <BannerSection />
         <AboutSection />
+        <TechStackMarquee />
         <ServicesSection />
+        <ProcessSection />
         <ContactSection />
       </main>
     </>

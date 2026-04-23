@@ -2,7 +2,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import LogoLetters from "./LogoLetters";
 
 export default function HeroSection() {
   const heroRef = useRef<HTMLElement>(null);
@@ -12,8 +11,11 @@ export default function HeroSection() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
+    // Ignore mobile address bar resize events to prevent jank
+    ScrollTrigger.config({ ignoreMobileResize: true });
+
     const el = heroRef.current;
-    if (!el) return;
+    if (!el || !nameRef.current || !introBlockRef.current) return;
 
     const ctx = gsap.context(() => {
       const wrappers = nameRef.current?.querySelectorAll<HTMLElement>(".kr-letter-wrapper");
@@ -23,17 +25,19 @@ export default function HeroSection() {
       const navEl = document.querySelector(".kr-nav");
 
       // Initial state: wrappers hidden/down, solid clip path hidden
-      gsap.set(wrappers, { y: 150, opacity: 0 });
-      gsap.set(solids, { "--clipPath": "inset(100% 0 0 0)" });
+      // will-change promotes elements to GPU compositor layers to reduce lag
+      gsap.set(wrappers, { y: 150, opacity: 0, willChange: "transform, opacity" });
+      gsap.set(solids, { "--clipPath": "inset(100% 0 0 0)", willChange: "clip-path" });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: el,
           start: "top top",
-          end: "+=150%", // Pins the section for 1.5x screen height
-          scrub: 1, // Smooth scrub
+          end: "+=150%",
+          scrub: 0.5, // Faster scrub reduces perceived lag on mobile
           anticipatePin: 1,
           pin: true,
+          pinSpacing: true,
         },
       });
 
@@ -74,13 +78,13 @@ export default function HeroSection() {
   const nameLetters = "KRISHORA".split("");
 
   return (
-    <section ref={heroRef} id="home" className="kr-hero" style={{ height: "100vh", position: "relative" }}>
+    <section ref={heroRef} id="home" className="kr-hero" style={{ height: "100vh", position: "relative", overflow: "hidden" }}>
       <div className="kr-hero__content" style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
 
-        {/* Intro content block (matches 3D-earth-main initial content) */}
-        <div ref={introBlockRef} style={{ position: "absolute", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", gap: "16px", textAlign: "center" }}>
-          <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(48px, 8vw, 100px)", fontWeight: 700, textTransform: "uppercase", lineHeight: 1 }}>New Vison for Technologies</h1>
-          <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(16px, 2vw, 22px)", color: "var(--text-muted)", maxWidth: "600px", lineHeight: 1.5 }}>
+        {/* Intro content block */}
+        <div ref={introBlockRef} style={{ position: "absolute", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", gap: "16px", textAlign: "center", padding: "0 24px", width: "100%", maxWidth: "800px" }}>
+          <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 6vw, 100px)", fontWeight: 700, textTransform: "uppercase", lineHeight: 1.05 }}>New Vision for Technologies</h1>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px, 2vw, 22px)", color: "var(--text-muted)", maxWidth: "600px", lineHeight: 1.5 }}>
             Engineering tomorrow's solutions, today. We build tech that inspires.
           </p>
           <a href="#about" className="kr-hero__cta" style={{ marginTop: "16px", opacity: 1, transform: "none" }}>
@@ -91,10 +95,38 @@ export default function HeroSection() {
           </a>
         </div>
 
-        {/* KRISHORA with stagger + clip-path reveal — mapped to scroll (Replacing Earth) */}
-        <div style={{ position: "absolute", zIndex: 5, pointerEvents: "none" }}>
-          <div ref={nameRef} className="kr-hero__name" aria-label="Krishora">
-            <LogoLetters />
+        {/* KRISHORA with stagger + clip-path reveal — mapped to scroll */}
+        <div style={{ position: "absolute", top: "42%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 5, pointerEvents: "none", width: "100%", display: "flex", justifyContent: "center", padding: "0 8px", boxSizing: "border-box" }}>
+          <div ref={nameRef} className="kr-hero__name" aria-label="Krishora" style={{ display: "flex", gap: "clamp(2px, 1vw, 10px)", flexWrap: "nowrap" }}>
+            {nameLetters.map((char, i) => (
+              <div key={i} className="kr-letter-wrapper" style={{ display: "inline-grid", placeItems: "center" }}>
+                {/* Outline Text */}
+                <span className="kr-letter-outline" style={{
+                  gridArea: "1 / 1",
+                  fontFamily: "'Molgan', sans-serif",
+                  fontSize: "clamp(28px, 10.5vw, 160px)",
+                  color: "transparent",
+                  WebkitTextStroke: "1.5px var(--text-primary)",
+                  lineHeight: 1,
+                  transform: "translate3d(0,0,0)",
+                }}>
+                  {char}
+                </span>
+                
+                {/* Solid Filled Text (Revealed via GSAP clipPath) */}
+                <span className="kr-letter-solid" style={{
+                  gridArea: "1 / 1",
+                  fontFamily: "'Molgan', sans-serif",
+                  fontSize: "clamp(28px, 10.5vw, 160px)",
+                  color: "var(--accent-1)",
+                  clipPath: "var(--clipPath)",
+                  lineHeight: 1,
+                  transform: "translate3d(0,0,0)",
+                }}>
+                  {char}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 
