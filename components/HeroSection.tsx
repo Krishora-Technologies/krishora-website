@@ -63,9 +63,9 @@ export default function HeroSection() {
           duration: 1.5,
           ease: "power2.out",
         }, "setting+=0.5")
-        // 4. Clip path reveal them
+        // 4. Clip path reveal them (half fill)
         .to(solids, {
-          "--clipPath": "inset(0% 0 0 0)",
+          "--clipPath": "inset(100% 0 0 0)",
           duration: 1.5,
           stagger: 0.1,
           ease: "power1.inOut",
@@ -103,7 +103,7 @@ export default function HeroSection() {
                 {/* Outline Text */}
                 <span className="kr-letter-outline" style={{
                   gridArea: "1 / 1",
-                  fontFamily: "'Molgan', sans-serif",
+                  fontFamily: "'Orbix', sans-serif",
                   fontSize: "clamp(28px, 10.5vw, 160px)",
                   color: "transparent",
                   WebkitTextStroke: "1.5px var(--text-primary)",
@@ -112,11 +112,11 @@ export default function HeroSection() {
                 }}>
                   {char}
                 </span>
-                
+
                 {/* Solid Filled Text (Revealed via GSAP clipPath) */}
                 <span className="kr-letter-solid" style={{
                   gridArea: "1 / 1",
-                  fontFamily: "'Molgan', sans-serif",
+                  fontFamily: "'Orbix', sans-serif",
                   fontSize: "clamp(28px, 10.5vw, 160px)",
                   color: "var(--accent-1)",
                   clipPath: "var(--clipPath)",

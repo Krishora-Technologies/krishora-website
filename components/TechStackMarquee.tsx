@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const TECHNOLOGIES = [
   { name: "Node.js", slug: "nodedotjs", color: "#339933" },
   { name: "Deno", slug: "deno", color: "#000000" },
-  { name: "Bun", slug: "bun", color: "#fbf0df" },
+  { name: "Bun", slug: "bun", color: "#fadeb3ff" },
   { name: "JavaScript", slug: "javascript", color: "#F7DF1E" },
   { name: "TypeScript", slug: "typescript", color: "#3178C6" },
   { name: "Python", slug: "python", color: "#3776AB" },
@@ -19,7 +19,6 @@ const TECHNOLOGIES = [
   { name: "Supabase", slug: "supabase", color: "#3ECF8E" },
   { name: "Firebase", slug: "firebase", color: "#FFCA28" },
   { name: "Docker", slug: "docker", color: "#2496ED" },
-  { name: "AWS", slug: "amazonaws", color: "#232F3E" },
   { name: "PostgreSQL", slug: "postgresql", color: "#4169E1" },
   { name: "GraphQL", slug: "graphql", color: "#E10098" },
   { name: "Redis", slug: "redis", color: "#DC382D" },

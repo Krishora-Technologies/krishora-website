@@ -21,12 +21,12 @@ export default function LogoLetters() {
         <clipPath id="c-a"><rect x="0" y="10" width="90" height="80" /></clipPath>
 
         <linearGradient id="grad-k" x1="0%" y1="100%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#a855f7" />
+          <stop offset="0%" stopColor="#3b82f6" />
           <stop offset="60%" stopColor="var(--text-primary, #000)" />
         </linearGradient>
         <linearGradient id="grad-a" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="40%" stopColor="var(--text-primary, #000)" />
-          <stop offset="100%" stopColor="#a855f7" />
+          <stop offset="100%" stopColor="#3b82f6" />
         </linearGradient>
       </defs>
 

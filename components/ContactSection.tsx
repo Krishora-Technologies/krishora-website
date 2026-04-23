@@ -1,6 +1,39 @@
 "use client";
+import { useState } from "react";
 
 export default function ContactSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', contact: '', requirement: '' });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+    
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      
+      if (!res.ok) throw new Error('Failed to send');
+      
+      setStatus('success');
+      setTimeout(() => {
+        setIsModalOpen(false);
+        setStatus('idle');
+        setFormData({ name: '', email: '', contact: '', requirement: '' });
+      }, 3000);
+    } catch (err) {
+      console.error(err);
+      setStatus('error');
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
   return (
     <footer id="contact" className="kr-contact">
       <div className="kr-contact__inner">
@@ -16,21 +49,16 @@ export default function ContactSection() {
           Let&apos;s talk about your next big idea.
         </p>
 
-        <a
-          href="mailto:hello@krishora.tech"
-          className="kr-contact__email magnetic"
+        <button 
+          onClick={() => setIsModalOpen(true)}
+          className="kr-contact__cta magnetic"
+          style={{ marginTop: '24px' }}
         >
-          hello@krishora.tech
-        </a>
-
-        <br />
-
-        <a href="mailto:hello@krishora.tech" className="kr-contact__cta magnetic">
           Start a Project
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-        </a>
+        </button>
 
         <div className="kr-footer">
           <span className="kr-footer__copy">
@@ -53,6 +81,69 @@ export default function ContactSection() {
               </svg>
             </a>
           </div>
+        </div>
+      </div>
+
+      {/* Start Project Modal */}
+      <div className={`kr-modal-overlay ${isModalOpen ? 'active' : ''}`}>
+        <div className="kr-modal">
+          <button 
+            className="kr-modal__close" 
+            onClick={() => setIsModalOpen(false)}
+            aria-label="Close modal"
+          >
+            &times;
+          </button>
+          
+          <div className="kr-modal__header">
+            <h3 className="kr-modal__title">Start a Project</h3>
+            <p className="kr-modal__sub">Tell us about your requirements and we&apos;ll get back to you shortly.</p>
+          </div>
+
+          <form className="kr-modal__form" onSubmit={handleSubmit}>
+            <input 
+              type="text" 
+              name="name" 
+              placeholder="Your Name" 
+              required 
+              value={formData.name}
+              onChange={handleChange}
+            />
+            <input 
+              type="email" 
+              name="email" 
+              placeholder="Your Email" 
+              required 
+              value={formData.email}
+              onChange={handleChange}
+            />
+            <input 
+              type="text" 
+              name="contact" 
+              placeholder="Contact Number" 
+              required 
+              value={formData.contact}
+              onChange={handleChange}
+            />
+            <textarea 
+              name="requirement" 
+              placeholder="Your Requirement" 
+              required 
+              value={formData.requirement}
+              onChange={handleChange}
+            />
+            
+            <button type="submit" className="kr-modal__submit" disabled={status === 'loading'}>
+              {status === 'loading' ? 'Sending...' : 'Submit Inquiry'}
+            </button>
+
+            {status === 'success' && (
+              <p className="kr-modal__message success">Message sent successfully!</p>
+            )}
+            {status === 'error' && (
+              <p className="kr-modal__message error">Failed to send message. Please try again.</p>
+            )}
+          </form>
         </div>
       </div>
     </footer>

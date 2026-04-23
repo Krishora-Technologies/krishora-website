@@ -11,14 +11,22 @@
   font-display: swap; /* swap is required for fast LCP */
 }
 
+@font-face {
+  font-family: 'Orbix';
+  src: local('Orbix'), url('/fonts/Orbix-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* --------------- TOKENS --------------- */
 :root {
   --bg-primary: #ffffff; /* Crisp, pure white background */
-  --bg-secondary: #f9f7ff; /* Very subtle, premium purple-tinted white for components */
+  --bg-secondary: #f0f5ff; /* Very subtle, premium blue-tinted white for components */
   --bg-dark: #0e0e0c;
-  --accent-1: #6c2bd9;
+  --accent-1: #2563eb;
   /* atmosphereDayColor */
-  --accent-2: #5b21b6;
+  --accent-2: #1d4ed8;
   /* atmosphereTwilightColor */
   --text-primary: #000000;
   --text-muted: #929292;
@@ -28,7 +36,6 @@
   --font-display: "Oswald", sans-serif;
   --font-brand: "Bruno Ace SC", sans-serif;
   --font-body: "Space Grotesk", sans-serif;
-  --font-serif: "Cormorant Garamond", Georgia, serif;
 
   /* Spacing */
   --section-pad: clamp(80px, 10vw, 160px);
@@ -111,7 +118,7 @@ ol {
 .kr-cursor--hover .kr-cursor__dot {
   width: 50px;
   height: 50px;
-  background: rgba(108, 43, 217, 0.1);
+  background: rgba(37, 99, 235, 0.1);
   border: 1.5px solid var(--accent-1);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -214,12 +221,12 @@ ol {
   justify-content: space-between;
   align-items: center;
   z-index: 1001;
-  background: rgba(249, 247, 255, 0.85); /* Tinted frosted glass */
+  background: rgba(240, 245, 255, 0.85); /* Tinted frosted glass */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(108, 43, 217, 0.2); /* Stronger purple border */
+  border: 1px solid rgba(37, 99, 235, 0.2); /* Stronger blue border */
   border-radius: 60px;
-  box-shadow: 0 15px 40px rgba(108, 43, 217, 0.15), 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 15px 40px rgba(37, 99, 235, 0.15), 0 4px 12px rgba(0,0,0,0.05);
   gap: 60px;
   mix-blend-mode: normal;
 }
@@ -369,12 +376,12 @@ ol {
 
 /* Special Gradients for K and Λ */
 .kr-hero__name span.kr-letter-grad-left::before {
-  background-image: linear-gradient(45deg, #a855f7 0%, var(--text-primary) 60%);
+  background-image: linear-gradient(45deg, #3b82f6 0%, var(--text-primary) 60%);
   background-color: transparent;
 }
 
 .kr-hero__name span.kr-letter-grad-right::before {
-  background-image: linear-gradient(135deg, var(--text-primary) 40%, #a855f7 100%);
+  background-image: linear-gradient(135deg, var(--text-primary) 40%, #3b82f6 100%);
   background-color: transparent;
 }
 .kr-hero__tagline {
@@ -498,7 +505,7 @@ ol {
 .kr-banner__orb--1 {
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(108,43,217,0.18) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(37,99,235,0.18) 0%, transparent 70%);
   top: -10%;
   left: -5%;
 }
@@ -506,7 +513,7 @@ ol {
 .kr-banner__orb--2 {
   width: 350px;
   height: 350px;
-  background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(59, 130, 246,0.15) 0%, transparent 70%);
   bottom: -10%;
   right: -5%;
 }
@@ -514,7 +521,7 @@ ol {
 .kr-banner__orb--3 {
   width: 250px;
   height: 250px;
-  background: radial-gradient(circle, rgba(108,43,217,0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%);
   top: 40%;
   left: 60%;
 }
@@ -567,7 +574,7 @@ ol {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent-1), #a78bfa, var(--accent-1), transparent);
+  background: linear-gradient(90deg, transparent, var(--accent-1), #60a5fa, var(--accent-1), transparent);
   background-size: 200% 100%;
   animation: kr-border-slide 4s linear infinite;
   z-index: 3;
@@ -1378,9 +1385,9 @@ ol {
 
 .kr-techstack__item:hover {
   background: var(--bg-primary);
-  box-shadow: 0 15px 40px rgba(108, 43, 217, 0.25);
+  box-shadow: 0 15px 40px rgba(37, 99, 235, 0.25);
   transform: translateY(-4px) scale(1.05);
-  border-color: rgba(108, 43, 217, 0.2);
+  border-color: rgba(37, 99, 235, 0.2);
 }
 
 .kr-techstack__icon {
@@ -1485,7 +1492,7 @@ ol {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   background: var(--bg-secondary);
-  border: 1px solid rgba(108, 43, 217, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.08);
   border-radius: 24px;
   padding: 48px;
   display: flex;
@@ -1718,7 +1725,7 @@ ol {
 .kr-process__step-content {
   width: 45%;
   background: var(--bg-secondary);
-  border: 1px solid rgba(108, 43, 217, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.08);
   padding: 40px;
   border-radius: 24px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.03);
@@ -1738,7 +1745,7 @@ ol {
   font-family: var(--font-display);
   font-size: 80px;
   font-weight: 700;
-  color: rgba(108, 43, 217, 0.1);
+  color: rgba(37, 99, 235, 0.1);
   line-height: 1;
   flex-shrink: 0;
 }
@@ -1774,8 +1781,8 @@ ol {
   border-radius: 50%;
   z-index: 2;
   box-shadow:
-    0 0 0 6px rgba(108, 43, 217, 0.06),
-    0 0 20px 4px rgba(108, 43, 217, 0.15);
+    0 0 0 6px rgba(37, 99, 235, 0.06),
+    0 0 20px 4px rgba(37, 99, 235, 0.15);
 }
 
 @media (max-width: 991px) {
@@ -1859,4 +1866,148 @@ ol {
   .kr-stat {
     padding: 24px;
   }
+}
+
+/* --------------- MODAL --------------- */
+.kr-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.kr-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.kr-modal {
+  background: var(--bg-primary);
+  width: 90%;
+  max-width: 500px;
+  border-radius: 24px;
+  padding: 40px;
+  position: relative;
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.kr-modal-overlay.active .kr-modal {
+  transform: translateY(0) scale(1);
+}
+
+.kr-modal__close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text-muted);
+  cursor: pointer; /* overridden by custom cursor if needed, but keeping for a11y */
+  transition: color 0.3s ease;
+}
+
+.kr-modal__close:hover {
+  color: var(--accent-1);
+}
+
+.kr-modal__header {
+  margin-bottom: 24px;
+}
+
+.kr-modal__title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.kr-modal__sub {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.kr-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.kr-modal__form input,
+.kr-modal__form textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: var(--bg-secondary);
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-primary);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  outline: none;
+}
+
+.kr-modal__form input:focus,
+.kr-modal__form textarea:focus {
+  border-color: var(--accent-1);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.kr-modal__form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.kr-modal__submit {
+  margin-top: 8px;
+  background: var(--accent-1);
+  color: #ffffff;
+  padding: 14px;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.kr-modal__submit:hover:not(:disabled) {
+  background: var(--accent-2);
+  transform: translateY(-2px);
+}
+
+.kr-modal__submit:disabled {
+  background: var(--text-muted);
+  opacity: 0.7;
+}
+
+.kr-modal__message {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  text-align: center;
+}
+
+.kr-modal__message.success {
+  color: #10b981;
+}
+
+.kr-modal__message.error {
+  color: #ef4444;
 }
