@@ -6,23 +6,23 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 const PROCESS_STEPS = [
   {
     num: "01",
-    title: "Discovery & Strategy",
-    desc: "We dive deep into your business goals, target audience, and technical requirements to formulate a comprehensive digital strategy.",
+    title: "AI Strategy & Use-Case Design",
+    desc: "We identify high-impact AI opportunities aligned with your business goals — focusing on ROI, feasibility, and real-world execution (not hype).",
   },
   {
     num: "02",
-    title: "Architecture & Systems Design",
-    desc: "We design robust, scalable backend architectures and data pipelines that serve as the foundation for your enterprise applications.",
+    title: "LLM Architecture & Data Design",
+    desc: "We design end-to-end AI systems including prompt workflows, embeddings, vector search, data pipelines, and model orchestration.",
   },
   {
     num: "03",
-    title: "Agile Development",
-    desc: "Using cutting-edge tech stacks, we build scalable, high-performance solutions with continuous feedback loops.",
+    title: "Build & Train",
+    desc: "We develop, fine-tune, and integrate LLM systems into your products and workflows with iterative testing and rapid feedback cycles.",
   },
   {
     num: "04",
-    title: "Deployment & Scale",
-    desc: "Rigorous testing precedes a smooth launch, followed by ongoing optimization to ensure your platform grows with your business.",
+    title: "Deploy, Scale & Optimize",
+    desc: "We deploy production-ready systems with monitoring, evaluation, and continuous optimization to ensure performance, reliability, and cost efficiency.",
   },
 ];
 
@@ -79,7 +79,9 @@ export default function ProcessSection() {
         <div className="kr-process__header">
           <p className="kr-section-label">How We Work</p>
           <h2 className="kr-process__title">Our Process</h2>
+          <p className="kr-services__desc" style={{paddingTop: "20px"}}>From Idea to Intelligent System</p>
         </div>
+        
 
         <div className="kr-process__timeline">
           {/* Central connecting line */}

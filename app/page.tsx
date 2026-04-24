@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 import HeroSection from "@/components/HeroSection";
 import BannerSection from "@/components/BannerSection";
@@ -11,9 +12,24 @@ import ServicesSection from "@/components/ServicesSection";
 import ProcessSection from "@/components/ProcessSection";
 import ContactSection from "@/components/ContactSection";
 
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
 export default function Home() {
   const cursorDotRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLElement>(null);
+  const [activeSection, setActiveSection] = useState("home");
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const target = document.querySelector(targetId);
+    if (target) {
+      gsap.to(window, {
+        scrollTo: { y: target, autoKill: false },
+        duration: 2.5, // Even slower for a cinematic feel
+        ease: "power4.inOut"
+      });
+    }
+  };
 
   /* ── Custom cursor (for-text style) ── */
   useEffect(() => {
@@ -43,10 +59,34 @@ export default function Home() {
     };
   }, []);
 
+  /* ── Section Observer for Nav ── */
+  useEffect(() => {
+    const sections = ["home", "about", "services", "contact"];
+    const observerOptions = {
+      root: null,
+      rootMargin: "-40% 0px -40% 0px", // Middle of screen
+      threshold: 0,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   /* ── Nav reveal after load ── */
   useEffect(() => {
     if (!navRef.current) return;
-    gsap.registerPlugin(ScrollTrigger);
 
     const logoSpans = navRef.current.querySelectorAll(".kr-nav__logo span");
     const links = navRef.current.querySelectorAll(".kr-nav__links a");
@@ -87,15 +127,31 @@ export default function Home() {
       {/* ── Fixed nav (GSAP moves it to dock) ── */}
       <header>
         <nav ref={navRef} className="kr-nav" aria-label="Main navigation">
-          <a href="#home" className="kr-nav__logo">
+          <a 
+            href="#home" 
+            onClick={(e) => handleNavClick(e, "#home")}
+            className={`kr-nav__logo ${activeSection === 'home' ? 'active' : ''}`}
+          >
             {"KRISHORA".split("").map((l, i) => (
               <span key={i}>{l}</span>
             ))}
           </a>
           <div className="kr-nav__links">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
+            <a 
+              href="#about" 
+              onClick={(e) => handleNavClick(e, "#about")}
+              className={activeSection === 'about' ? 'active' : ''}
+            >About</a>
+            <a 
+              href="#services" 
+              onClick={(e) => handleNavClick(e, "#services")}
+              className={activeSection === 'services' ? 'active' : ''}
+            >Services</a>
+            <a 
+              href="#contact" 
+              onClick={(e) => handleNavClick(e, "#contact")}
+              className={activeSection === 'contact' ? 'active' : ''}
+            >Contact</a>
           </div>
         </nav>
       </header>

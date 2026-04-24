@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import SplitFlapReveal from "./SplitFlapReveal";
 
 export default function HeroSection() {
   const heroRef = useRef<HTMLElement>(null);
@@ -83,11 +84,14 @@ export default function HeroSection() {
 
         {/* Intro content block */}
         <div ref={introBlockRef} style={{ position: "absolute", zIndex: 10, display: "flex", flexDirection: "column", alignItems: "center", gap: "16px", textAlign: "center", padding: "0 24px", width: "100%", maxWidth: "800px" }}>
-          <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 6vw, 100px)", fontWeight: 700, textTransform: "uppercase", lineHeight: 1.05 }}>New Vision for Technologies</h1>
+          <h3 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(32px, 6vw, 100px)", fontWeight: 700, textTransform: "uppercase", lineHeight: 1.05 }}>New Vision for Technologies</h3>
+          <div style={{ paddingBottom: "14px", paddingTop: "4px" }}>
+            {/* <SplitFlapReveal text="Intelligence. Engineered. Scalable." /> */}
+          </div>
           <p style={{ fontFamily: "var(--font-body)", fontSize: "clamp(14px, 2vw, 22px)", color: "var(--text-muted)", maxWidth: "600px", lineHeight: 1.5 }}>
-            Engineering tomorrow's solutions, today. We build tech that inspires.
+            We design and deploy AI-native systems powered by Large Language Models (LLMs) transforming how businesses operate, automate, and grow.
           </p>
-          <a href="#about" className="kr-hero__cta" style={{ marginTop: "16px", opacity: 1, transform: "none" }}>
+          <a href="#contact" className="kr-hero__cta" style={{ marginTop: "16px", opacity: 1, transform: "none" }}>
             Get started.
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 12h14M12 5l7 7-7 7" />

@@ -38,31 +38,31 @@ export default function BannerSection() {
         stagger: 0.15,
         ease: "elastic.out(1, 0.5)",
       })
-      .to(el.querySelector(".kr-banner__eyebrow"), {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        ease: "power3.out",
-      }, "-=0.8")
-      .to(el.querySelectorAll(".kr-banner__headline span"), {
-        y: 0,
-        duration: 0.9,
-        stagger: 0.08,
-        ease: "power3.out",
-      }, "-=0.4")
-      .to(el.querySelector(".kr-banner__sub"), {
-        y: 0,
-        opacity: 1,
-        duration: 0.7,
-        ease: "power2.out",
-      }, "-=0.5")
-      .to(el.querySelectorAll(".kr-banner__cta a"), {
-        y: 0,
-        opacity: 1,
-        duration: 0.5,
-        stagger: 0.1,
-        ease: "power2.out",
-      }, "-=0.4");
+        .to(el.querySelector(".kr-banner__eyebrow"), {
+          y: 0,
+          opacity: 1,
+          duration: 0.6,
+          ease: "power3.out",
+        }, "-=0.8")
+        .to(el.querySelectorAll(".kr-banner__headline span"), {
+          y: 0,
+          duration: 0.9,
+          stagger: 0.08,
+          ease: "power3.out",
+        }, "-=0.4")
+        .to(el.querySelector(".kr-banner__sub"), {
+          y: 0,
+          opacity: 1,
+          duration: 0.7,
+          ease: "power2.out",
+        }, "-=0.5")
+        .to(el.querySelectorAll(".kr-banner__cta a"), {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power2.out",
+        }, "-=0.4");
 
       // Continuous orb float
       el.querySelectorAll(".kr-banner__orb").forEach((orb, i) => {
@@ -161,17 +161,15 @@ export default function BannerSection() {
 
       <div ref={tiltRef} className="kr-banner__tilt">
         <div className="kr-banner__inner">
-          <p className="kr-banner__eyebrow">What We Do</p>
+          {/* <p className="kr-banner__eyebrow">What We Do</p> */}
 
           <h2 className="kr-banner__headline">
             <span>We Engineer</span>
-            <span>Digital Excellence</span>
+            <span>AI-Driven Digital Intelligence</span>
           </h2>
 
           <p className="kr-banner__sub">
-            From cloud-native architectures to AI-driven platforms, we transform
-            complex challenges into elegant, scalable solutions that power modern
-            enterprises.
+            From LLM-powered applications to autonomous workflows, we turn complex problems into intelligent systems that think, adapt, and scale.
           </p>
 
           <div className="kr-banner__cta">

@@ -46,13 +46,12 @@ export default function ContactSection() {
         <p className="kr-contact__eyebrow">Get In Touch</p>
 
         <h2 className="kr-contact__heading">
-          Let&apos;s Build<br />
-          <span>Something</span>
+          Let&apos;s Build <br />
+          <span>Intelligent Systems</span>
         </h2>
 
         <p className="kr-contact__sub">
-          Have a tech challenge? We engineer solutions that scale.
-          Let&apos;s talk about your next big idea.
+          Have a problem AI can solve? We design systems that think, automate, and scale.
         </p>
 
         <button 
@@ -68,7 +67,7 @@ export default function ContactSection() {
 
         <div className="kr-footer">
           <span className="kr-footer__copy">
-            &copy; 2024 Krishora Technologies. All rights reserved.
+            &copy; 2026 Krishora Technologies. All rights reserved.
           </span>
           <div className="kr-footer__social">
             <a href="https://linkedin.com" aria-label="LinkedIn" target="_blank" rel="noreferrer">
