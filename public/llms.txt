@@ -1,0 +1,27 @@
+# Krishora Technologies
+
+> Premier AI Automation & LLM Development Studio.
+
+## Overview
+Krishora Technologies specializes in building production-grade AI systems, custom LLMs, and intelligent automation for enterprises. We bridge the gap between AI potential and production reality.
+
+## Core Services
+- **AI Chatbots**: Intelligent assistants for support, sales, and internal workflows.
+- **AI Voice Agents**: Human-like voice agents for inbound and outbound calls.
+- **LLM Application Development**: Custom GPT-style apps and copilots.
+- **RAG Systems**: Retrieval-Augmented Generation for context-aware AI.
+- **AI Agents**: Autonomous systems for task execution.
+- **AI Automation**: End-to-end intelligent pipelines.
+
+## Purpose
+Our mission is to operationalize AI for businesses, ensuring scalability, security, and real-world value.
+
+## Contact
+- Website: https://krishoratech.com
+- GitHub: https://github.com/Krishora-Technologies
+- Location: India (Serving Worldwide)
+
+## Sections
+- [About](https://krishoratech.com/#about)
+- [Services](https://krishoratech.com/#services)
+- [Contact](https://krishoratech.com/#contact)

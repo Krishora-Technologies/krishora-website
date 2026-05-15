@@ -54,6 +54,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  alternates: {
+    canonical: "https://krishoratech.com",
+  },
 };
 
 export default function RootLayout({
@@ -78,20 +81,45 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "Krishora Technologies Pvt Ltd",
-              "url": "https://krishoratech.com",
-              "logo": "https://krishoratech.com/logo.png",
-              "description": "Leading AI-powered technology company specializing in AI automation systems, LLM development, custom app development, and intelligent business solutions.",
-              "address": {
-                "@type": "PostalAddress",
-                "addressCountry": "India"
-              },
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "",
-                "contactType": "customer service"
-              }
+              "@graph": [
+                {
+                  "@type": "Organization",
+                  "@id": "https://krishoratech.com/#organization",
+                  "name": "Krishora Technologies Pvt Ltd",
+                  "url": "https://krishoratech.com",
+                  "logo": "https://krishoratech.com/logo.png",
+                  "description": "Krishora Technologies is a premier AI automation and LLM development studio specializing in custom smart solutions.",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressCountry": "India"
+                  },
+                  "contactPoint": {
+                    "@type": "ContactPoint",
+                    "telephone": "+91-XXXXXXXXXX",
+                    "contactType": "sales",
+                    "areaServed": "Worldwide",
+                    "availableLanguage": ["en", "hi"]
+                  },
+                  "sameAs": [
+                    "https://linkedin.com/company/krishora",
+                    "https://twitter.com/krishoratech",
+                    "https://github.com/Krishora-Technologies"
+                  ]
+                },
+                {
+                  "@type": "WebSite",
+                  "@id": "https://krishoratech.com/#website",
+                  "url": "https://krishoratech.com",
+                  "name": "Krishora Technologies",
+                  "publisher": { "@id": "https://krishoratech.com/#organization" }
+                },
+                {
+                  "@type": "Service",
+                  "serviceType": "AI Automation & LLM Development",
+                  "provider": { "@id": "https://krishoratech.com/#organization" },
+                  "description": "Custom LLM development, AI-powered automation, and smart application solutions for businesses."
+                }
+              ]
             })
           }}
         />
