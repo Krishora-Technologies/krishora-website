@@ -16,9 +16,21 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export default function HomeClient() {
 
-
-
-
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const target = document.querySelector(window.location.hash);
+      if (target) {
+        // Wait a small tick for GSAP to set up the DOM heights
+        setTimeout(() => {
+          gsap.to(window, {
+            scrollTo: { y: target, autoKill: false },
+            duration: 1.5,
+            ease: "power3.out"
+          });
+        }, 100);
+      }
+    }
+  }, []);
 
   return (
     <>
