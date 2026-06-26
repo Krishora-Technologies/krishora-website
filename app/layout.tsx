@@ -54,9 +54,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  alternates: {
-    canonical: "https://krishoratech.com",
-  },
 };
 
 import CustomCursor from "@/components/CustomCursor";
@@ -100,7 +97,7 @@ export default function RootLayout({
                   },
                   "contactPoint": {
                     "@type": "ContactPoint",
-                    "telephone": "+91-XXXXXXXXXX",
+                    "telephone": "+91-8108181629",
                     "contactType": "sales",
                     "areaServed": "Worldwide",
                     "availableLanguage": ["en", "hi"]
