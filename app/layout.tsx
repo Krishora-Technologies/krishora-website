@@ -59,6 +59,9 @@ export const metadata: Metadata = {
   },
 };
 
+import CustomCursor from "@/components/CustomCursor";
+import GlobalNav from "@/components/GlobalNav";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -83,14 +86,16 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@graph": [
                 {
-                  "@type": "Organization",
+                  "@type": ["Organization", "LocalBusiness", "SoftwareCompany"],
                   "@id": "https://krishoratech.com/#organization",
-                  "name": "Krishora Technologies Pvt Ltd",
+                  "name": "Krishora Technologies PVT. LTD.",
                   "url": "https://krishoratech.com",
                   "logo": "https://krishoratech.com/logo.png",
-                  "description": "Krishora Technologies is a premier AI automation and LLM development studio specializing in custom smart solutions.",
+                  "description": "Krishora Technologies is a premier AI automation and LLM development studio specializing in custom smart solutions. Recognized as the best software agency in Mumbai, India.",
                   "address": {
                     "@type": "PostalAddress",
+                    "addressLocality": "Mumbai",
+                    "addressRegion": "Maharashtra",
                     "addressCountry": "India"
                   },
                   "contactPoint": {
@@ -101,6 +106,7 @@ export default function RootLayout({
                     "availableLanguage": ["en", "hi"]
                   },
                   "sameAs": [
+                    "https://share.google/goVKZOyVYLjk7IN6R",
                     "https://linkedin.com/company/krishora",
                     "https://twitter.com/krishoratech",
                     "https://github.com/Krishora-Technologies"
@@ -124,7 +130,11 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <CustomCursor />
+        <GlobalNav />
+        {children}
+      </body>
     </html>
   );
 }
