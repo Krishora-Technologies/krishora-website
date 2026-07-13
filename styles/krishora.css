@@ -401,6 +401,21 @@ ol {
   background-color: transparent;
 }
 
+/* Spin Background Animation */
+.kr-spin-bg img {
+  animation: kr-spin-anim 30s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes kr-spin-anim {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .kr-hero__tagline {
   font-family: var(--font-body);
   font-size: clamp(13px, 1.8vw, 18px);

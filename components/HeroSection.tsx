@@ -8,6 +8,7 @@ export default function HeroSection() {
   const heroRef = useRef<HTMLElement>(null);
   const introBlockRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
+  const spinBgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -29,6 +30,9 @@ export default function HeroSection() {
       // will-change promotes elements to GPU compositor layers to reduce lag
       gsap.set(wrappers, { y: 150, opacity: 0, willChange: "transform, opacity" });
       gsap.set(solids, { "--clipPath": "inset(100% 0 0 0)", willChange: "clip-path" });
+      if (spinBgRef.current) {
+        gsap.set(spinBgRef.current, { opacity: 0, scale: 0.4, willChange: "transform, opacity" });
+      }
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -58,6 +62,13 @@ export default function HeroSection() {
           stagger: 0.1,
           ease: "power2.out",
         }, "setting+=0.5")
+        // Animate the spinning background image in
+        .to(spinBgRef.current, {
+          opacity: 1,
+          scale: 1,
+          duration: 1.5,
+          ease: "power2.out",
+        }, "setting+=0.5")
         // 3. Move the navigation dock down at the exact same time
         .to(navEl, {
           top: "calc(100vh - 80px)",
@@ -66,7 +77,7 @@ export default function HeroSection() {
         }, "setting+=0.5")
         // 4. Clip path reveal them (half fill)
         .to(solids, {
-          "--clipPath": "inset(100% 0 0 0)",
+          "--clipPath": "inset(0% 0 0 0)",
           duration: 1.5,
           stagger: 0.1,
           ease: "power1.inOut",
@@ -100,17 +111,24 @@ export default function HeroSection() {
         </div>
 
         {/* KRISHORA with stagger + clip-path reveal — mapped to scroll */}
-        <div style={{ position: "absolute", top: "42%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 5, pointerEvents: "none", width: "100%", display: "flex", justifyContent: "center", padding: "0 8px", boxSizing: "border-box" }}>
-          <div ref={nameRef} className="kr-hero__name" aria-label="Krishora" style={{ display: "flex", gap: "clamp(2px, 1vw, 10px)", flexWrap: "nowrap" }}>
+        <div style={{ position: "absolute", top: "42%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 5, pointerEvents: "none", width: "100%", display: "flex", justifyContent: "center", alignItems: "center", padding: "0 8px", boxSizing: "border-box" }}>
+          <div ref={spinBgRef} className="kr-spin-bg" style={{ position: "absolute", zIndex: -1, width: "clamp(320px, 50vw, 680px)", height: "clamp(320px, 50vw, 680px)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <img src="/krishora-spin.png" alt="Krishora Spin Element" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+          </div>
+          <div ref={nameRef} className="kr-hero__name" aria-label="Krishora" style={{ display: "flex", gap: "clamp(1px, 0.4vw, 5px)", flexWrap: "nowrap", position: "relative" }}>
             {nameLetters.map((char, i) => (
-              <div key={i} className="kr-letter-wrapper" style={{ display: "inline-grid", placeItems: "center" }}>
+              <div key={i} className="kr-letter-wrapper" style={{ 
+                display: "inline-grid", 
+                placeItems: "center",
+                filter: "drop-shadow(0 0 10px rgba(168,85,247,0.8)) drop-shadow(0 0 20px rgba(168,85,247,0.5)) drop-shadow(0 4px 10px rgba(0,0,0,0.4))"
+              }}>
                 {/* Outline Text */}
                 <span className="kr-letter-outline" style={{
                   gridArea: "1 / 1",
                   fontFamily: "'Orbix', sans-serif",
                   fontSize: "clamp(28px, 10.5vw, 160px)",
                   color: "transparent",
-                  WebkitTextStroke: "1.5px var(--text-primary)",
+                  WebkitTextStroke: "1px #A855F7",
                   lineHeight: 1,
                   transform: "translate3d(0,0,0)",
                 }}>
@@ -122,7 +140,7 @@ export default function HeroSection() {
                   gridArea: "1 / 1",
                   fontFamily: "'Orbix', sans-serif",
                   fontSize: "clamp(28px, 10.5vw, 160px)",
-                  color: "var(--accent-1)",
+                  color: "#F8FAFF",
                   clipPath: "var(--clipPath)",
                   lineHeight: 1,
                   transform: "translate3d(0,0,0)",
