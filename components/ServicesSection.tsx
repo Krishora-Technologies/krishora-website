@@ -1,5 +1,11 @@
 "use client";
-import { useEffect, useRef, useState, useCallback, startTransition } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  startTransition,
+} from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -87,17 +93,25 @@ const SERVICES = [
       "Website & WhatsApp Bots",
       "Customer Support Automation",
       "Lead Qualification",
-      "Context-Aware Conversations"
+      "Context-Aware Conversations",
     ],
     colSpan: "col-span-1",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="kr-service-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="kr-service-icon"
+      >
         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
         <circle cx="9" cy="10" r="1" fill="currentColor" stroke="none" />
         <circle cx="15" cy="10" r="1" fill="currentColor" stroke="none" />
         <path d="M9 14.5s.8 1 3 1 3-1 3-1" />
       </svg>
-    )
+    ),
   },
   {
     id: "calling",
@@ -107,14 +121,22 @@ const SERVICES = [
       "Inbound & Outbound Calls",
       "Sales & Support Automation",
       "Voice + LLM Integration",
-      "Real-Time Responses"
+      "Real-Time Responses",
     ],
     colSpan: "col-span-1",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="kr-service-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="kr-service-icon"
+      >
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
       </svg>
-    )
+    ),
   },
   {
     id: "llm",
@@ -124,14 +146,24 @@ const SERVICES = [
       "Custom AI Assistants",
       "Internal Tools",
       "Customer-Facing Apps",
-      "Workflow Integration"
+      "Workflow Integration",
     ],
     colSpan: "col-span-1 md:col-span-2",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="kr-service-icon">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        className="kr-service-icon"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"
+        />
       </svg>
-    )
+    ),
   },
 
   // ✅ second row (more technical layer)
@@ -143,18 +175,26 @@ const SERVICES = [
       "Vector Databases",
       "Semantic Search",
       "Knowledge Integration",
-      "High-Accuracy Retrieval"
+      "High-Accuracy Retrieval",
     ],
     colSpan: "col-span-1",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="kr-service-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="kr-service-icon"
+      >
         <ellipse cx="12" cy="5" rx="8" ry="3" />
         <path d="M4 5v5c0 1.66 3.58 3 8 3s8-1.34 8-3V5" />
         <path d="M4 10v5c0 1.66 3.58 3 8 3s8-1.34 8-3v-5" />
         <path d="M4 15v4c0 1.66 3.58 3 8 3s8-1.34 8-3v-4" />
         <path d="M15 17.5l2 2 4-4" strokeWidth="1.8" stroke="currentColor" />
       </svg>
-    )
+    ),
   },
   {
     id: "agents",
@@ -164,19 +204,30 @@ const SERVICES = [
       "Task Automation",
       "Tool-Using Agents",
       "Multi-Agent Systems",
-      "Workflow Execution"
+      "Workflow Execution",
     ],
     colSpan: "col-span-1",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="kr-service-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="kr-service-icon"
+      >
         <circle cx="12" cy="12" r="3" />
         <circle cx="4" cy="6" r="2" />
         <circle cx="20" cy="6" r="2" />
         <circle cx="4" cy="18" r="2" />
         <circle cx="20" cy="18" r="2" />
-        <path d="M6 6.5l4.5 4M17.5 6.5 13 10.5M6 17.5l4.5-4M17.5 17.5 13 13.5" strokeWidth="1.2" />
+        <path
+          d="M6 6.5l4.5 4M17.5 6.5 13 10.5M6 17.5l4.5-4M17.5 17.5 13 13.5"
+          strokeWidth="1.2"
+        />
       </svg>
-    )
+    ),
   },
   {
     id: "automation",
@@ -186,16 +237,24 @@ const SERVICES = [
       "Workflow Automation",
       "Decision Systems",
       "Event-Driven Pipelines",
-      "Process Optimization"
+      "Process Optimization",
     ],
     colSpan: "col-span-1 md:col-span-2",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="kr-service-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="kr-service-icon"
+      >
         <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
         <circle cx="12" cy="12" r="4" />
         <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none" />
       </svg>
-    )
+    ),
   },
   {
     id: "data",
@@ -205,18 +264,26 @@ const SERVICES = [
       "ETL Pipelines",
       "Data Warehousing",
       "Streaming Data Systems",
-      "Data Cleaning & Labeling"
+      "Data Cleaning & Labeling",
     ],
     colSpan: "col-span-1",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="kr-service-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="kr-service-icon"
+      >
         <rect x="3" y="3" width="7" height="7" rx="1" />
         <rect x="14" y="3" width="7" height="7" rx="1" />
         <rect x="3" y="14" width="7" height="7" rx="1" />
         <path d="M17.5 17.5h.01" strokeWidth="3" strokeLinecap="round" />
         <path d="M10 6.5h4M17.5 10v4M6.5 10v4" strokeWidth="1.5" />
       </svg>
-    )
+    ),
   },
   {
     id: "observability",
@@ -226,14 +293,22 @@ const SERVICES = [
       "Prompt & Response Monitoring",
       "Hallucination Detection",
       "Usage Analytics",
-      "Evaluation Frameworks"
+      "Evaluation Frameworks",
     ],
     colSpan: "col-span-1 md:col-span-2",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="kr-service-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="kr-service-icon"
+      >
         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
       </svg>
-    )
+    ),
   },
   {
     id: "web",
@@ -243,16 +318,24 @@ const SERVICES = [
       "React, Vue, Next.js",
       "AI-Powered UX",
       "SEO & Performance",
-      "Headless Architectures"
+      "Headless Architectures",
     ],
     colSpan: "col-span-1 md:col-span-2",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="kr-service-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="kr-service-icon"
+      >
         <circle cx="12" cy="12" r="10" />
         <path d="M12 2a14.5 14.5 0 0 1 0 20M12 2a14.5 14.5 0 0 0 0 20M2 12h20" />
         <path d="M4.93 7h14.14M4.93 17h14.14" strokeWidth="1.2" />
       </svg>
-    )
+    ),
   },
   {
     id: "mobile",
@@ -262,16 +345,24 @@ const SERVICES = [
       "React Native & Flutter",
       "On-device AI",
       "Offline-first Apps",
-      "App Store Optimization"
+      "App Store Optimization",
     ],
     colSpan: "col-span-1",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="kr-service-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="kr-service-icon"
+      >
         <rect x="5" y="2" width="14" height="20" rx="2" />
         <path d="M12 18h.01" strokeWidth="2.5" strokeLinecap="round" />
         <path d="M9 6h6" strokeWidth="1.2" />
       </svg>
-    )
+    ),
   },
   {
     id: "devops",
@@ -281,16 +372,24 @@ const SERVICES = [
       "CI/CD Pipelines",
       "Infrastructure as Code",
       "Monitoring & Logging",
-      "Security Integration"
+      "Security Integration",
     ],
     colSpan: "col-span-1",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="kr-service-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="kr-service-icon"
+      >
         <polyline points="16 18 22 12 16 6" />
         <polyline points="8 6 2 12 8 18" />
         <line x1="12" y1="2" x2="12" y2="22" />
       </svg>
-    )
+    ),
   },
 ];
 export default function ServicesSection() {
@@ -300,73 +399,76 @@ export default function ServicesSection() {
 
   const handleCardClick = useCallback((id: string) => {
     startTransition(() => {
-      setFlippedId(prev => prev === id ? null : id);
+      setFlippedId((prev) => (prev === id ? null : id));
     });
   }, []);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     ScrollTrigger.config({ ignoreMobileResize: true });
-    
+
     if (!sectionRef.current) return;
     const validCards = cardsRef.current.filter(Boolean);
 
     // Set initial states via GSAP to prevent CLS
-    const headerElements = sectionRef.current.querySelectorAll('.kr-services__header > *');
+    const headerElements = sectionRef.current.querySelectorAll(
+      ".kr-services__header > *",
+    );
     gsap.set(headerElements, { y: 40, opacity: 0 });
     if (validCards.length > 0) {
-      gsap.set(validCards, { y: 120, opacity: 0, rotateX: 45, rotateY: -15, scale: 0.8, filter: "blur(20px)" });
+      gsap.set(validCards, {
+        y: 120,
+        opacity: 0,
+        rotateX: 45,
+        rotateY: -15,
+        scale: 0.8,
+        filter: "blur(20px)",
+      });
     }
 
     // Header animation (initial state set above)
-    gsap.to(
-      headerElements,
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        }
-      }
-    );
+    gsap.to(headerElements, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "top 80%",
+      },
+    });
 
     // Cards Entrance animation (initial state set above)
     if (validCards.length > 0) {
-      gsap.to(
-        validCards,
-        {
-          y: 0,
-          opacity: 1,
-          rotateX: 0,
-          rotateY: 0,
-          scale: 1,
-          filter: "blur(0px)",
-          stagger: 0.1,
-          duration: 1.2,
-          ease: "elastic.out(1, 0.7)",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 60%",
-          }
-        }
-      );
+      gsap.to(validCards, {
+        y: 0,
+        opacity: 1,
+        rotateX: 0,
+        rotateY: 0,
+        scale: 1,
+        filter: "blur(0px)",
+        stagger: 0.1,
+        duration: 1.2,
+        ease: "elastic.out(1, 0.7)",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 60%",
+        },
+      });
     }
 
     // 3D Tilt Effect on Hover
     validCards.forEach((card) => {
       if (!card) return;
-      const content = card.querySelector('.kr-service-card__content');
-      const glow = card.querySelector('.kr-service-card__glow');
+      const content = card.querySelector(".kr-service-card__content");
+      const glow = card.querySelector(".kr-service-card__glow");
 
       card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
+
         // Calculate rotation based on cursor position
         const xRot = gsap.utils.mapRange(0, rect.height, 5, -5, y);
         const yRot = gsap.utils.mapRange(0, rect.width, -5, 5, x);
@@ -385,7 +487,7 @@ export default function ServicesSection() {
             y: y,
             opacity: 1,
             duration: 0.3,
-            ease: "power2.out"
+            ease: "power2.out",
           });
         }
       });
@@ -402,7 +504,6 @@ export default function ServicesSection() {
         }
       });
     });
-
   }, []);
 
   return (
@@ -411,17 +512,25 @@ export default function ServicesSection() {
         <div className="kr-services__header">
           <p className="kr-section-label">Our Capabilities</p>
           <h2 className="kr-services__title">What We Do</h2>
-          <span className="kr-typo-word-small outlined"style={{paddingBottom: "20px"}}>AI-First Engineering for Modern Enterprises</span>
+          <span
+            className="kr-typo-word-small outlined"
+            style={{ paddingBottom: "20px" }}
+          >
+            AI-First Engineering for Modern Enterprises
+          </span>
           <p className="kr-services__desc">
-We design systems where AI is not a feature — it’s the core engine.</p>
+            We design systems where AI is not a feature — it’s the core engine.
+          </p>
         </div>
 
         <div className="kr-services__bento">
           {SERVICES.map((s, i) => (
             <div
               key={s.id}
-              ref={(el) => { cardsRef.current[i] = el; }}
-              className={`kr-service-card ${s.colSpan} ${flippedId === s.id ? 'is-flipped' : ''}`}
+              ref={(el) => {
+                cardsRef.current[i] = el;
+              }}
+              className={`kr-service-card ${s.colSpan} ${flippedId === s.id ? "is-flipped" : ""}`}
               onClick={() => handleCardClick(s.id)}
             >
               <div className="kr-service-card__inner">
@@ -436,7 +545,14 @@ We design systems where AI is not a feature — it’s the core engine.</p>
                     <p className="kr-service-card__sub">{s.sub}</p>
                     <div className="kr-service-card__arrow">
                       {/* Plus icon when not flipped */}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
                         <line x1="12" y1="5" x2="12" y2="19"></line>
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                       </svg>
@@ -447,10 +563,14 @@ We design systems where AI is not a feature — it’s the core engine.</p>
                 {/* Back of card */}
                 <div className="kr-service-card__back">
                   <div className="kr-service-card__content">
-                    <h3 className="kr-service-card__back-title">{s.label} Details</h3>
+                    <h3 className="kr-service-card__back-title">
+                      {s.label} Details
+                    </h3>
                     <div className="kr-service-card__list">
                       {s.details.map((detail, idx) => (
-                        <div key={idx} className="kr-service-card__list-item">{detail}</div>
+                        <div key={idx} className="kr-service-card__list-item">
+                          {detail}
+                        </div>
                       ))}
                     </div>
                   </div>

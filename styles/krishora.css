@@ -4,8 +4,10 @@
    ============================================ */
 
 @font-face {
-  font-family: 'Molgan';
-  src: local('Molgan'), url('/fonts/Molgan.otf') format('opentype');
+  font-family: "Molgan";
+  src:
+    local("Molgan"),
+    url("/fonts/Molgan.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -13,8 +15,10 @@
 }
 
 @font-face {
-  font-family: 'Orbix';
-  src: local('Orbix'), url('/fonts/Orbix-Regular.ttf') format('truetype');
+  font-family: "Orbix";
+  src:
+    local("Orbix"),
+    url("/fonts/Orbix-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -52,8 +56,6 @@
   margin: 0;
   padding: 0;
 }
-
-
 
 html,
 body {
@@ -111,7 +113,11 @@ ol {
   background: var(--accent-1);
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s ease, border 0.3s ease;
+  transition:
+    width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    background 0.3s ease,
+    border 0.3s ease;
   pointer-events: none;
   will-change: transform, width, height;
 }
@@ -172,7 +178,12 @@ ol {
   top: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(45deg, #fff 0%, var(--accent-1) 60%, var(--accent-2) 100%);
+  background-image: linear-gradient(
+    45deg,
+    #fff 0%,
+    var(--accent-1) 60%,
+    var(--accent-2) 100%
+  );
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -229,7 +240,9 @@ ol {
   border: 1px solid rgba(37, 99, 235, 0.2);
   /* Stronger blue border */
   border-radius: 60px;
-  box-shadow: 0 15px 40px rgba(37, 99, 235, 0.15), 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 15px 40px rgba(37, 99, 235, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.05);
   gap: clamp(20px, 5vw, 60px);
   mix-blend-mode: normal;
 }
@@ -270,7 +283,7 @@ ol {
 }
 
 .kr-nav__links a::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -2px;
   left: 0;
@@ -310,12 +323,20 @@ ol {
 
 /* Subtle background texture in hero */
 .kr-hero::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74, 150, 232, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(25, 80, 229, 0.04) 0%, transparent 60%);
+    radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      rgba(74, 150, 232, 0.06) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 80% 80%,
+      rgba(25, 80, 229, 0.04) 0%,
+      transparent 60%
+    );
   pointer-events: none;
 }
 
@@ -397,7 +418,11 @@ ol {
 }
 
 .kr-hero__name span.kr-letter-grad-right::before {
-  background-image: linear-gradient(135deg, var(--text-primary) 40%, #3b82f6 100%);
+  background-image: linear-gradient(
+    135deg,
+    var(--text-primary) 40%,
+    #3b82f6 100%
+  );
   background-color: transparent;
 }
 
@@ -491,7 +516,6 @@ ol {
 }
 
 @keyframes kr-bounce {
-
   0%,
   100% {
     transform: translateX(-50%) translateY(0);
@@ -503,7 +527,6 @@ ol {
 }
 
 @keyframes kr-line-pulse {
-
   0%,
   100% {
     opacity: 0.5;
@@ -537,7 +560,11 @@ ol {
 .kr-banner__orb--1 {
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(37, 99, 235, 0.18) 0%,
+    transparent 70%
+  );
   top: -10%;
   left: -5%;
 }
@@ -545,7 +572,11 @@ ol {
 .kr-banner__orb--2 {
   width: 350px;
   height: 350px;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.15) 0%,
+    transparent 70%
+  );
   bottom: -10%;
   right: -5%;
 }
@@ -553,7 +584,11 @@ ol {
 .kr-banner__orb--3 {
   width: 250px;
   height: 250px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(37, 99, 235, 0.12) 0%,
+    transparent 70%
+  );
   top: 40%;
   left: 60%;
 }
@@ -564,9 +599,11 @@ ol {
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%),
-      rgba(108, 43, 217, 0.10),
-      transparent 50%);
+  background: radial-gradient(
+    600px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(108, 43, 217, 0.1),
+    transparent 50%
+  );
   transition: background 0.15s ease;
 }
 
@@ -587,7 +624,8 @@ ol {
   border-radius: 50%;
   top: calc(var(--i) * 4.2%);
   left: calc(var(--i) * 7.3% + 12%);
-  animation: kr-float-up calc(4s + var(--i) * 0.5s) ease-in-out infinite alternate;
+  animation: kr-float-up calc(4s + var(--i) * 0.5s) ease-in-out infinite
+    alternate;
   opacity: 0.8;
 }
 
@@ -605,13 +643,20 @@ ol {
 
 /* Animated border glow */
 .kr-banner::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent-1), #60a5fa, var(--accent-1), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent-1),
+    #60a5fa,
+    var(--accent-1),
+    transparent
+  );
   background-size: 200% 100%;
   animation: kr-border-slide 4s linear infinite;
   z-index: 3;
@@ -715,21 +760,26 @@ ol {
 }
 
 @keyframes kr-breathe-glow {
-
   0%,
   100% {
-    box-shadow: 0 0 12px rgba(108, 43, 217, 0.25), 0 0 30px rgba(108, 43, 217, 0.1);
+    box-shadow:
+      0 0 12px rgba(108, 43, 217, 0.25),
+      0 0 30px rgba(108, 43, 217, 0.1);
   }
 
   50% {
-    box-shadow: 0 0 24px rgba(108, 43, 217, 0.45), 0 0 60px rgba(108, 43, 217, 0.2);
+    box-shadow:
+      0 0 24px rgba(108, 43, 217, 0.45),
+      0 0 60px rgba(108, 43, 217, 0.2);
   }
 }
 
 .kr-banner__cta a:first-child:hover {
   background: var(--accent-2);
   animation: none;
-  box-shadow: 0 0 30px rgba(108, 43, 217, 0.5), 0 0 60px rgba(108, 43, 217, 0.25);
+  box-shadow:
+    0 0 30px rgba(108, 43, 217, 0.5),
+    0 0 60px rgba(108, 43, 217, 0.25);
 }
 
 /* Secondary CTA */
@@ -782,7 +832,6 @@ ol {
   display: inline-block;
   will-change: transform, opacity;
 }
-
 
 .kr-typo-word.outlined {
   color: transparent;
@@ -974,7 +1023,9 @@ ol {
   border-radius: 24px;
   padding: 48px 40px;
   width: 100%;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   will-change: transform, opacity;
 }
@@ -1004,7 +1055,7 @@ ol {
 }
 
 .kr-about__list li::before {
-  content: '✦';
+  content: "✦";
   position: absolute;
   left: 0;
   top: 4px;
@@ -1020,7 +1071,6 @@ ol {
   margin-top: 48px !important;
   line-height: 1.2;
 }
-
 
 /* --------------- SERVICES SECTION — animatos Hero.jsx --------------- */
 .kr-services {
@@ -1068,7 +1118,7 @@ ol {
 }
 
 .kr-services__nav-item::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 8px;
   left: 24px;
@@ -1157,14 +1207,18 @@ ol {
 }
 
 .kr-contact::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -80px;
   left: 50%;
   transform: translateX(-50%);
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(74, 150, 232, 0.1) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(74, 150, 232, 0.1) 0%,
+    transparent 70%
+  );
   pointer-events: none;
 }
 
@@ -1220,7 +1274,9 @@ ol {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding-bottom: 4px;
   margin-bottom: 60px;
-  transition: border-color 0.3s ease, color 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .kr-contact__email:hover {
@@ -1306,7 +1362,7 @@ ol {
 }
 
 .kr-section-label::before {
-  content: '';
+  content: "";
   width: 32px;
   height: 1px;
   background: var(--accent-1);
@@ -1394,8 +1450,20 @@ ol {
   width: 100vw;
   margin-left: 50%;
   transform: translateX(-50%);
-  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
   padding: 30px 0;
   /* Extra space for hover scaling and glow */
 }
@@ -1561,7 +1629,9 @@ ol {
   flex-direction: column;
   overflow: hidden;
   transform-style: preserve-3d;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
 }
 
@@ -1581,7 +1651,11 @@ ol {
   position: absolute;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle closest-side, rgba(74, 150, 232, 0.15), transparent);
+  background: radial-gradient(
+    circle closest-side,
+    rgba(74, 150, 232, 0.15),
+    transparent
+  );
   transform: translate(-50%, -50%);
   pointer-events: none;
   opacity: 0;
@@ -1610,7 +1684,10 @@ ol {
   border: 1px solid rgba(74, 150, 232, 0.2);
   color: var(--accent-1);
   transform: translateZ(30px);
-  transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease;
+  transition:
+    transform 0.4s ease,
+    color 0.4s ease,
+    background 0.4s ease;
 }
 
 .kr-service-icon {
@@ -1701,7 +1778,7 @@ ol {
 }
 
 .kr-service-card__list-item::before {
-  content: '';
+  content: "";
   flex-shrink: 0;
   width: 6px;
   height: 6px;
@@ -2043,7 +2120,9 @@ ol {
   font-family: var(--font-body);
   font-size: 15px;
   color: var(--text-primary);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   outline: none;
 }
 
@@ -2072,7 +2151,9 @@ ol {
   font-family: var(--font-body);
   font-size: 15px;
   color: var(--text-primary);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   outline: none;
   cursor: pointer;
 }
@@ -2091,7 +2172,9 @@ ol {
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 15px;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;

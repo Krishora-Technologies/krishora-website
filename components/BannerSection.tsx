@@ -17,11 +17,17 @@ export default function BannerSection() {
 
     const ctx = gsap.context(() => {
       // Initial set
-      gsap.set(el.querySelectorAll(".kr-banner__eyebrow"), { y: 20, opacity: 0 });
+      gsap.set(el.querySelectorAll(".kr-banner__eyebrow"), {
+        y: 20,
+        opacity: 0,
+      });
       gsap.set(el.querySelectorAll(".kr-banner__headline span"), { y: "110%" });
       gsap.set(el.querySelector(".kr-banner__sub"), { y: 20, opacity: 0 });
       gsap.set(el.querySelectorAll(".kr-banner__cta a"), { y: 20, opacity: 0 });
-      gsap.set(el.querySelectorAll(".kr-banner__orb"), { scale: 0, opacity: 0 });
+      gsap.set(el.querySelectorAll(".kr-banner__orb"), {
+        scale: 0,
+        opacity: 0,
+      });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -38,31 +44,47 @@ export default function BannerSection() {
         stagger: 0.15,
         ease: "elastic.out(1, 0.5)",
       })
-        .to(el.querySelector(".kr-banner__eyebrow"), {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-        }, "-=0.8")
-        .to(el.querySelectorAll(".kr-banner__headline span"), {
-          y: 0,
-          duration: 0.9,
-          stagger: 0.08,
-          ease: "power3.out",
-        }, "-=0.4")
-        .to(el.querySelector(".kr-banner__sub"), {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          ease: "power2.out",
-        }, "-=0.5")
-        .to(el.querySelectorAll(".kr-banner__cta a"), {
-          y: 0,
-          opacity: 1,
-          duration: 0.5,
-          stagger: 0.1,
-          ease: "power2.out",
-        }, "-=0.4");
+        .to(
+          el.querySelector(".kr-banner__eyebrow"),
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: "power3.out",
+          },
+          "-=0.8",
+        )
+        .to(
+          el.querySelectorAll(".kr-banner__headline span"),
+          {
+            y: 0,
+            duration: 0.9,
+            stagger: 0.08,
+            ease: "power3.out",
+          },
+          "-=0.4",
+        )
+        .to(
+          el.querySelector(".kr-banner__sub"),
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: "power2.out",
+          },
+          "-=0.5",
+        )
+        .to(
+          el.querySelectorAll(".kr-banner__cta a"),
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            stagger: 0.1,
+            ease: "power2.out",
+          },
+          "-=0.4",
+        );
 
       // Continuous orb float
       el.querySelectorAll(".kr-banner__orb").forEach((orb, i) => {
@@ -106,13 +128,24 @@ export default function BannerSection() {
       });
       // Spotlight follow
       if (spotlightRef.current) {
-        spotlightRef.current.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-        spotlightRef.current.style.setProperty("--my", `${e.clientY - rect.top}px`);
+        spotlightRef.current.style.setProperty(
+          "--mx",
+          `${e.clientX - rect.left}px`,
+        );
+        spotlightRef.current.style.setProperty(
+          "--my",
+          `${e.clientY - rect.top}px`,
+        );
       }
     };
     const onLeave = () => {
       if (!tilt) return;
-      gsap.to(tilt, { rotationY: 0, rotationX: 0, duration: 0.8, ease: "power2.out" });
+      gsap.to(tilt, {
+        rotationY: 0,
+        rotationX: 0,
+        duration: 0.8,
+        ease: "power2.out",
+      });
     };
     el.addEventListener("mousemove", onMove);
     el.addEventListener("mouseleave", onLeave);
@@ -129,7 +162,12 @@ export default function BannerSection() {
         gsap.to(btn, { x: dx, y: dy, duration: 0.3, ease: "power2.out" });
       };
       const onBtnLeave = () => {
-        gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+        gsap.to(btn, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: "elastic.out(1, 0.3)",
+        });
       };
       btn.addEventListener("mousemove", onBtnMove);
       btn.addEventListener("mouseleave", onBtnLeave);
@@ -150,12 +188,20 @@ export default function BannerSection() {
       <div className="kr-banner__orb kr-banner__orb--3" aria-hidden="true" />
 
       {/* Mouse spotlight */}
-      <div ref={spotlightRef} className="kr-banner__spotlight" aria-hidden="true" />
+      <div
+        ref={spotlightRef}
+        className="kr-banner__spotlight"
+        aria-hidden="true"
+      />
 
       {/* Floating particles */}
       <div className="kr-banner__particles" aria-hidden="true">
         {Array.from({ length: 24 }).map((_, i) => (
-          <span key={i} className="kr-banner__particle" style={{ '--i': i } as React.CSSProperties} />
+          <span
+            key={i}
+            className="kr-banner__particle"
+            style={{ "--i": i } as React.CSSProperties}
+          />
         ))}
       </div>
 
@@ -169,12 +215,28 @@ export default function BannerSection() {
           </h2>
 
           <p className="kr-banner__sub">
-            From LLM-powered applications to autonomous workflows, we turn complex problems into intelligent systems that think, adapt, and scale.
+            From LLM-powered applications to autonomous workflows, we turn
+            complex problems into intelligent systems that think, adapt, and
+            scale.
           </p>
 
           <div className="kr-banner__cta">
-            <a ref={(el) => { btnRefs.current[0] = el; }} href="#services">Explore Services</a>
-            <a ref={(el) => { btnRefs.current[1] = el; }} href="#contact">Get in Touch</a>
+            <a
+              ref={(el) => {
+                btnRefs.current[0] = el;
+              }}
+              href="#services"
+            >
+              Explore Services
+            </a>
+            <a
+              ref={(el) => {
+                btnRefs.current[1] = el;
+              }}
+              href="#contact"
+            >
+              Get in Touch
+            </a>
           </div>
         </div>
       </div>

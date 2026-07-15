@@ -51,7 +51,7 @@ export default function ProcessSection() {
     // Animate each step sliding in
     stepsRef.current.forEach((step, index) => {
       if (!step) return;
-      
+
       const content = step.querySelector(".kr-process__step-content");
       const dot = step.querySelector(".kr-process__dot");
       const isEven = index % 2 === 1; // 0-indexed, so 1 and 3 are "even" visual steps on the right
@@ -68,8 +68,11 @@ export default function ProcessSection() {
         },
       });
 
-      tl.to(dot, { scale: 1, duration: 0.4, ease: "back.out(2)" })
-        .to(content, { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.2");
+      tl.to(dot, { scale: 1, duration: 0.4, ease: "back.out(2)" }).to(
+        content,
+        { x: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+        "-=0.2",
+      );
     });
   }, []);
 
@@ -79,9 +82,10 @@ export default function ProcessSection() {
         <div className="kr-process__header">
           <p className="kr-section-label">How We Work</p>
           <h2 className="kr-process__title">Our Process</h2>
-          <p className="kr-services__desc" style={{paddingTop: "20px"}}>From Idea to Intelligent System</p>
+          <p className="kr-services__desc" style={{ paddingTop: "20px" }}>
+            From Idea to Intelligent System
+          </p>
         </div>
-        
 
         <div className="kr-process__timeline">
           {/* Central connecting line */}
@@ -90,7 +94,13 @@ export default function ProcessSection() {
           </div>
 
           {PROCESS_STEPS.map((step, idx) => (
-            <div key={idx} ref={(el) => { stepsRef.current[idx] = el; }} className="kr-process__step">
+            <div
+              key={idx}
+              ref={(el) => {
+                stepsRef.current[idx] = el;
+              }}
+              className="kr-process__step"
+            >
               <div className="kr-process__step-content">
                 <div className="kr-process__step-text">
                   <h3 className="kr-process__step-title">{step.title}</h3>

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
@@ -7,43 +7,43 @@ export async function POST(req: Request) {
 
     if (!name || !email || !contact || !requirement) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
+        { error: "Missing required fields" },
+        { status: 400 },
       );
     }
 
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
     if (!webhookUrl) {
-      console.error('DISCORD_WEBHOOK_URL is not set in environment variables');
+      console.error("DISCORD_WEBHOOK_URL is not set in environment variables");
       return NextResponse.json(
-        { error: 'Server configuration error' },
-        { status: 500 }
+        { error: "Server configuration error" },
+        { status: 500 },
       );
     }
 
     const discordMessage = {
       embeds: [
         {
-          title: 'New Project Inquiry',
+          title: "New Project Inquiry",
           color: 0x00f2fe, // matches the website's light blue accent
           fields: [
             {
-              name: 'Name',
+              name: "Name",
               value: name,
               inline: true,
             },
             {
-              name: 'Email',
+              name: "Email",
               value: email,
               inline: true,
             },
             {
-              name: 'Contact Number',
+              name: "Contact Number",
               value: contact,
               inline: true,
             },
             {
-              name: 'Requirement',
+              name: "Requirement",
               value: requirement,
             },
           ],
@@ -53,9 +53,9 @@ export async function POST(req: Request) {
     };
 
     const response = await fetch(webhookUrl, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(discordMessage),
     });
@@ -66,10 +66,10 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
-    console.error('Error sending message to Discord:', error);
+    console.error("Error sending message to Discord:", error);
     return NextResponse.json(
-      { error: 'Failed to send message' },
-      { status: 500 }
+      { error: "Failed to send message" },
+      { status: 500 },
     );
   }
 }

@@ -1,8 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
 
-const postsDirectory = path.join(process.cwd(), 'content/blog');
+const postsDirectory = path.join(process.cwd(), "content/blog");
 
 export type BlogPost = {
   slug: string;
@@ -22,17 +22,17 @@ export function getPostSlugs() {
 }
 
 export function getPostBySlug(slug: string): BlogPost {
-  const realSlug = slug.replace(/\.md$/, '');
+  const realSlug = slug.replace(/\.md$/, "");
   const fullPath = path.join(postsDirectory, `${realSlug}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
 
   return {
     slug: realSlug,
-    title: data.title || 'Untitled',
-    date: data.date || '',
-    author: data.author || 'Krishora Technologies',
-    excerpt: data.excerpt || '',
+    title: data.title || "Untitled",
+    date: data.date || "",
+    author: data.author || "Krishora Technologies",
+    excerpt: data.excerpt || "",
     coverImage: data.coverImage,
     content,
   };

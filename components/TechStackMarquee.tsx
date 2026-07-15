@@ -45,7 +45,7 @@ export default function TechStackMarquee() {
           trigger: containerRef.current,
           start: "top 90%",
         },
-      }
+      },
     );
   }, []);
 

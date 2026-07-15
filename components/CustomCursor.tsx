@@ -19,7 +19,12 @@ export default function CustomCursor() {
 
       // Event delegation for hover states so it works globally across all pages
       const target = e.target as HTMLElement;
-      if (target.closest && target.closest("a, button, [class*='nav-item'], [class*='magnetic'], .kr-service-card, .blog-card")) {
+      if (
+        target.closest &&
+        target.closest(
+          "a, button, [class*='nav-item'], [class*='magnetic'], .kr-service-card, .blog-card",
+        )
+      ) {
         dot!.closest(".kr-cursor")?.classList.add("kr-cursor--hover");
       } else {
         dot!.closest(".kr-cursor")?.classList.remove("kr-cursor--hover");

@@ -6,7 +6,6 @@ const PHRASES = ["Intelligence.", "Engineered.", "Scalable."];
 
 const COLORS = [" #000000ff", "#000000ff", "#000000ff"];
 
-
 // Each phrase starts after all previous phrases' letters have revealed
 function getPhraseStartDelay(index: number): number {
   let delay = 0.4; // initial offset
@@ -93,7 +92,6 @@ function PhraseReveal({
               lineHeight: 1.15,
               color: color,
               whiteSpace: "pre",
-              
             }}
           >
             {char}
@@ -116,7 +114,6 @@ function PhraseReveal({
           backgroundImage: `linear-gradient(90deg, transparent 0%, ${color} 30%, ${color} 70%, transparent 100%)`,
           transformOrigin: "center",
           borderRadius: "2px",
-          
         }}
       />
     </div>

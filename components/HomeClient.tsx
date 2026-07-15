@@ -15,7 +15,6 @@ import ContactSection from "@/components/ContactSection";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export default function HomeClient() {
-
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash) {
       const target = document.querySelector(window.location.hash);
@@ -25,7 +24,7 @@ export default function HomeClient() {
           gsap.to(window, {
             scrollTo: { y: target, autoKill: false },
             duration: 1.5,
-            ease: "power3.out"
+            ease: "power3.out",
           });
         }, 100);
       }
@@ -34,7 +33,6 @@ export default function HomeClient() {
 
   return (
     <>
-
       <main id="main-content">
         <HeroSection />
         <BannerSection />
