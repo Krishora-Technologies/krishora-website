@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitFlapReveal from "./SplitFlapReveal";
@@ -15,6 +16,12 @@ export default function HeroSection() {
 
     // Ignore mobile address bar resize events to prevent jank
     ScrollTrigger.config({ ignoreMobileResize: true });
+
+    // Force ScrollTrigger to recalculate offsets properly when fonts/images change the layout
+    const resizeObserver = new ResizeObserver(() => {
+      ScrollTrigger.refresh();
+    });
+    resizeObserver.observe(document.body);
 
     const el = heroRef.current;
     if (!el || !nameRef.current || !introBlockRef.current) return;
@@ -84,7 +91,10 @@ export default function HeroSection() {
         }, "setting+=0.8");
     }, el);
 
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      resizeObserver.disconnect();
+    };
   }, []);
 
   const nameLetters = "KRISHORA".split("");
@@ -112,8 +122,8 @@ export default function HeroSection() {
 
         {/* KRISHORA with stagger + clip-path reveal — mapped to scroll */}
         <div style={{ position: "absolute", top: "42%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 5, pointerEvents: "none", width: "100%", display: "flex", justifyContent: "center", alignItems: "center", padding: "0 8px", boxSizing: "border-box" }}>
-          <div ref={spinBgRef} className="kr-spin-bg" style={{ position: "absolute", zIndex: -1, width: "clamp(320px, 50vw, 680px)", height: "clamp(320px, 50vw, 680px)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <img src="/krishora-spin.png" alt="Krishora Spin Element" style={{ width: "100%", height: "100%", objectFit: "contain" }} />
+          <div ref={spinBgRef} className="kr-spin-bg" style={{ position: "absolute", zIndex: -1, width: "clamp(320px, 50vw, 680px)", height: "clamp(320px, 50vw, 680px)", display: "flex", alignItems: "center", justifyContent: "center", opacity: 0 }}>
+            <Image src="/krishora-spin.png" alt="Krishora Spin Element" fill sizes="(max-width: 768px) 70vw, 50vw" priority style={{ objectFit: "contain" }} onLoad={() => ScrollTrigger.refresh()} />
           </div>
           <div ref={nameRef} className="kr-hero__name" aria-label="Krishora" style={{ display: "flex", gap: "clamp(1px, 0.4vw, 5px)", flexWrap: "nowrap", position: "relative" }}>
             {nameLetters.map((char, i) => (
